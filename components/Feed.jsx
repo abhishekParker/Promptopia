@@ -31,7 +31,14 @@ const Feed = () => {
     fetchPosts();
   }, []);
 
-  const handleSearchChange = (e) => {};
+  console.log(posts);
+
+  const filteredPosts = posts.filter(
+    (post) =>
+      post.prompt.toLowerCase().includes(searchText.toLowerCase()) ||
+      post.creator.username.toLowerCase().includes(searchText.toLowerCase()) ||
+      post.tag.toLowerCase().includes(searchText.toLowerCase())
+  );
 
   return (
     <section className="feed">
@@ -40,12 +47,12 @@ const Feed = () => {
           type="text"
           placeholder="Search for a tag or a username"
           value={searchText}
-          onChange={handleSearchChange}
+          onChange={(e) => setSearchText(e.target.value)}
           required
           className="search_input peer"
         />
       </form>
-      <PromptCardList data={posts} handleTagClick={() => {}} />
+      <PromptCardList data={filteredPosts} handleTagClick={() => {}} />
     </section>
   );
 };
