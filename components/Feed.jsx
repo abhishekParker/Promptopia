@@ -33,6 +33,10 @@ const Feed = () => {
 
   console.log(posts);
 
+  const handleTagClick = (tag) => {
+    setSearchText(tag);
+  };
+
   const filteredPosts = posts.filter(
     (post) =>
       post.prompt.toLowerCase().includes(searchText.toLowerCase()) ||
@@ -52,7 +56,7 @@ const Feed = () => {
           className="search_input peer"
         />
       </form>
-      <PromptCardList data={filteredPosts} handleTagClick={() => {}} />
+      <PromptCardList data={filteredPosts} handleTagClick={handleTagClick} />
     </section>
   );
 };
